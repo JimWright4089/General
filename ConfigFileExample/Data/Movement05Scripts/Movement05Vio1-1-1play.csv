@@ -1,0 +1,22 @@
+Orch File,Name,..\..\Data\FullOrch.csv,Date,9/3/2015 10:09:14 AM,md5,37121646,version,1
+Real Times File,Name,..\..\Data\Movement05Midi\Movement05Timing.csv,Date,9/15/2015 2:26:44 PM,md5,62910583,version,2
+Measures Times File,Name,..\..\Data\Movement05Midi\Movement05Measures.csv,Date,9/13/2015 12:27:42 PM,md5,29197104,version,1
+MIDI File,Name,..\..\Data\Movement05Midi\Movement05Vio1.mid,Date,9/13/2015 11:35:00 AM,md5,23752792
+Start Frame,End Frame,Note,Volume
+0,299,0,0
+300,314,72,80
+315,329,71,80
+330,344,69,80
+345,370,67,80
+371,371,0,0
+372,397,65,80
+398,398,0,0
+399,424,64,80
+425,451,62,80
+452,452,0,0
+453,478,60,80
+479,479,0,0
+480,551,59,80
+552,554,0,0
+555,569,57,80
+570,869,0,0

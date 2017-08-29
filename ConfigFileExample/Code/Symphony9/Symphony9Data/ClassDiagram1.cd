@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Symphony9Data.Selection">
+    <Position X="6.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAIIgAAAKAAAAABAACAAAIGAADAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>Selection.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="bCancel" />
+      <Field Name="bOK" />
+      <Field Name="components" />
+      <Field Name="lMovement" />
+      <Field Name="mConfig" />
+      <Field Name="mFullOrch" />
+      <Field Name="mMovement" />
+      <Field Name="mResult" />
+      <Field Name="tvOrch" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="System.Windows.Forms.Button" Collapsed="true">
+    <Position X="2.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="System.Windows.Forms.Label" Collapsed="true">
+    <Position X="2.75" Y="6" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Symphony9Data.Config">
+    <Position X="13" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAQHEIxCIAAggAAAAAAEQIMABRACAAQiAAAAAAAA=</HashCode>
+      <FileName>Config.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Symphony9Data.FullOrch">
+    <Position X="9.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABQAEAQAAIgQAAAQAIAABAQIAAAAAAEAAAACIAAAAAA=</HashCode>
+      <FileName>FullOrch.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="mConfig" />
+      <Field Name="mPlayers" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="System.Windows.Forms.TreeView" Collapsed="true">
+    <Position X="2.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="System.Collections.Generic.List&lt;T&gt;" Collapsed="true">
+    <Position X="7.5" Y="7.75" Width="1.5" />
+    <NestedTypes>
+      <Struct Name="System.Collections.Generic.List&lt;T&gt;.Enumerator" Collapsed="true">
+        <TypeIdentifier />
+        <Lollipop Position="0.2" />
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Struct Name="System.Int32" Collapsed="true">
+    <Position X="3" Y="1" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Struct>
+  <Interface Name="System.ComponentModel.IContainer" Collapsed="true">
+    <Position X="2.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Enum Name="System.Windows.Forms.DialogResult" Collapsed="true">
+    <Position X="3" Y="2" Width="1.5" />
+    <TypeIdentifier />
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

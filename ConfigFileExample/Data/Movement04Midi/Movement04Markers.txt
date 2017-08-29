@@ -1,0 +1,4 @@
+Desc	Time	Format	Duration	Type	Notes
+Measure 1	0	00:00.000	cue
+Measure 944	24:21	00:00.000	cue
+

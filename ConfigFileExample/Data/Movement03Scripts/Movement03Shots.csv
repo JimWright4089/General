@@ -1,0 +1,75 @@
+ID,Shot,Start,End,Camera
+1,Winds High,0,662,Camera25
+2,Full Front,663,1110,Camera14
+3,Full St Right,1111,1316,Camera17
+4,Winds High,1317,1513,Camera25
+5,Closeup of first violin,1514,1919,Camera03
+6,Conductor,1920,2129,Camera12
+7,Winds and Brass,2130,2308,Camera24
+8,Full St Right,2309,2643,Camera17
+9,Wide on Timp,2644,2793,Camera23
+10,Closeup of back violins,2794,3034,Camera02
+11,Conductor,3035,3333,Camera12
+12,Winds High,3334,3886,Camera25
+13,Low Strings High,3887,4333,Camera18
+14,Full Front,4334,4786,Camera14
+15,Cellos Upclose,4787,5007,Camera01
+16,Winds High,5008,5271,Camera25
+17,Full St Right,5272,5496,Camera17
+18,Closeup of first violin,5497,5932,Camera03
+19,Full Left Side,5933,6082,Camera15
+20,Wide on Timp,6083,6371,Camera23
+21,Full Right Side,6372,6900,Camera16
+22,Conductor,6901,7270,Camera12
+23,Low Strings High,7271,7680,Camera18
+24,Full Front,7681,8245,Camera14
+25,Closeup on Oboes,8246,8389,Camera08
+26,CloseUp on Horns,8390,8539,Camera07
+27,Closeup of back violins,8540,8811,Camera02
+28,Wide on Timp,8812,9232,Camera23
+29,Winds High,9233,9753,Camera25
+30,Closeup on Flutes,9754,10154,Camera06
+31,Full Right Side,10155,10663,Camera16
+32,Full Right Side,10664,11082,Camera16
+33,Winds High,11083,11655,Camera25
+34,Cellos Upclose,11656,11892,Camera01
+35,Winds and Brass,11893,13190,Camera24
+36,Closeup on Flutes,13191,13344,Camera06
+37,Full St Right,13345,13602,Camera17
+38,Conductor,13603,13884,Camera12
+39,Full Brass,13885,14104,Camera13
+40,Closeup of first violin,14105,14879,Camera03
+41,Full Right Side,14880,15141,Camera16
+42,Wide on Timp,15142,15318,Camera23
+43,More Full Left,15319,15824,Camera19
+44,Conductor,15825,16115,Camera12
+45,Closeup of back violins,16116,16491,Camera02
+46,Winds High,16492,16613,Camera25
+47,Winds and Brass,16614,16848,Camera24
+48,Cellos Upclose,16849,17032,Camera01
+49,Full Front,17033,17524,Camera14
+50,Closeup on Trumpets,17525,17851,Camera11
+51,Closeup of first violin,17852,17986,Camera03
+52,CloseUp on Horns,17987,18372,Camera07
+53,Full Front,18373,18879,Camera14
+54,Full Right Side,18880,19429,Camera16
+55,Closeup of back violins,19430,19770,Camera02
+56,Low Strings High,19771,20307,Camera18
+57,Full St Right,20308,20525,Camera17
+58,Closeup on Timp,20526,20665,Camera09
+59,Full Brass,20666,20835,Camera13
+60,Closeup of first violin,20836,21159,Camera03
+61,Full Left Side,21160,21498,Camera15
+62,Full St Right,21499,22016,Camera17
+63,Closeup of first violin,22017,22565,Camera03
+64,Conductor,22566,22833,Camera12
+65,Full Front,22834,23335,Camera14
+66,Winds High,23336,23775,Camera25
+67,Closeup of first violin,23776,24020,Camera03
+68,Low Strings High,24021,24361,Camera18
+69,Full Right Side,24362,24465,Camera16
+70,Closeup on Flutes,24466,24670,Camera06
+71,Winds High,24671,25011,Camera25
+72,Full Front,25012,25464,Camera14
+73,Winds High,25465,25720,Camera25
+74,Full Front,25721,26370,Camera14

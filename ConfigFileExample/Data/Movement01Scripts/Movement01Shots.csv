@@ -1,0 +1,134 @@
+ID,Shot,Start,End,Camera
+59,Cellos Upclose,11587,11815,theCamera01
+23,Closeup of back violins,3228,3409,theCamera02
+26,Closeup of back violins,3965,4114,theCamera02
+64,Closeup of back violins,12603,12763,theCamera02
+87,Closeup of back violins,18590,18866,theCamera02
+2,Closeup of first violin,601,704,theCamera03
+16,Closeup of first violin,2037,2250,theCamera03
+24,Closeup of first violin,3410,3723,theCamera03
+30,Closeup of first violin,5064,5280,theCamera03
+37,Closeup of first violin,5878,6238,theCamera03
+55,Closeup of first violin,10719,10947,theCamera03
+62,Closeup of first violin,12237,12452,theCamera03
+79,Closeup of first violin,16594,16802,theCamera03
+86,Closeup of first violin,18327,18589,theCamera03
+97,Closeup of first violin,20285,20592,theCamera03
+132,Closeup of first violin,27049,27249,theCamera03
+71,Closeup on Bassoon,14014,14420,theCamera04
+116,Closeup on Bassoon,24436,24527,theCamera04
+129,Closeup on Bassoon,26497,26727,theCamera04
+68,Closeup on Clars,13402,13551,theCamera05
+107,Closeup on Clars,22249,22430,theCamera05
+120,Closeup on Clars,24997,25108,theCamera05
+125,Closeup on Clars,25878,26032,theCamera05
+4,Closeup on Flutes,804,891,theCamera06
+12,Closeup on Flutes,1629,1680,theCamera06
+19,Closeup on Flutes,2523,2672,theCamera06
+29,Closeup on Flutes,4866,5063,theCamera06
+35,Closeup on Flutes,5763,5813,theCamera06
+67,Closeup on Flutes,13198,13401,theCamera06
+73,Closeup on Flutes,14624,14796,theCamera06
+89,Closeup on Flutes,18982,19084,theCamera06
+91,Closeup on Flutes,19171,19320,theCamera06
+114,Closeup on Flutes,24175,24324,theCamera06
+118,Closeup on Flutes,24584,24632,theCamera06
+126,Closeup on Flutes,26033,26200,theCamera06
+130,Closeup on Flutes,26728,26877,theCamera06
+11,CloseUp on Horns,1511,1628,theCamera07
+82,CloseUp on Horns,17456,17606,theCamera07
+105,CloseUp on Horns,21949,22098,theCamera07
+34,Closeup on Oboes,5685,5762,theCamera08
+40,Closeup on Oboes,6698,6877,theCamera08
+54,Closeup on Oboes,10655,10718,theCamera08
+83,Closeup on Oboes,17607,17756,theCamera08
+115,Closeup on Oboes,24325,24435,theCamera08
+117,Closeup on Oboes,24528,24583,theCamera08
+128,Closeup on Oboes,26351,26496,theCamera08
+88,Closeup on Timp,18867,18981,theCamera09
+7,Closeup on Timp2,1119,1261,theCamera10
+21,Closeup on Timp2,2871,3057,theCamera10
+90,Closeup on Timp2,19085,19170,theCamera10
+13,Closeup on Trumpets,1681,1737,theCamera11
+50,Closeup on Trumpets,9682,9904,theCamera11
+95,Closeup on Trumpets,19834,20022,theCamera11
+28,Conductor,4716,4865,theCamera12
+51,Conductor,9905,10215,theCamera12
+66,Conductor,12983,13197,theCamera12
+75,Conductor,15079,15477,theCamera12
+109,Conductor,22653,22802,theCamera12
+46,Full Brass,8662,8811,theCamera13
+103,Full Brass,21683,21797,theCamera13
+112,Full Brass,23543,23819,theCamera13
+1,Full Front,0,600,theCamera14
+20,Full Front,2673,2870,theCamera14
+45,Full Front,8342,8661,theCamera14
+58,Full Front,11483,11586,theCamera14
+65,Full Front,12764,12982,theCamera14
+80,Full Front,16803,17076,theCamera14
+99,Full Front,20868,21118,theCamera14
+108,Full Front,22431,22652,theCamera14
+110,Full Front,22803,23223,theCamera14
+121,Full Front,25109,25323,theCamera14
+133,Full Front,27250,28530,theCamera14
+25,Full Left Side,3724,3964,theCamera15
+38,Full Left Side,6239,6520,theCamera15
+56,Full Left Side,10948,11129,theCamera15
+127,Full Left Side,26201,26350,theCamera15
+10,Full Right Side,1429,1510,theCamera16
+39,Full Right Side,6521,6697,theCamera16
+69,Full Right Side,13552,13770,theCamera16
+74,Full Right Side,14797,15078,theCamera16
+104,Full Right Side,21798,21948,theCamera16
+8,Full St Right,1262,1358,theCamera17
+15,Full St Right,1888,2036,theCamera17
+33,Full St Right,5546,5684,theCamera17
+44,Full St Right,7939,8341,theCamera17
+101,Full St Right,21269,21385,theCamera17
+3,Low Strings High,705,803,theCamera18
+17,Low Strings High,2251,2411,theCamera18
+61,Low Strings High,12094,12236,theCamera18
+72,Low Strings High,14421,14623,theCamera18
+102,Low Strings High,21386,21682,theCamera18
+123,Low Strings High,25522,25631,theCamera18
+36,More Full Left,5814,5877,theCamera19
+78,More Full Left,16327,16593,theCamera19
+6,Other strings,1011,1118,theCamera20
+9,Other strings,1359,1428,theCamera20
+5,Strings,892,1010,theCamera21
+18,Strings,2412,2522,theCamera21
+42,Strings,7115,7452,theCamera21
+47,Strings,8812,8932,theCamera21
+53,Strings,10557,10654,theCamera21
+77,Strings,16109,16326,theCamera21
+84,Strings,17757,18038,theCamera21
+93,Strings,19472,19620,theCamera21
+122,Strings,25324,25521,theCamera21
+63,Very Close of front viola,12453,12602,theCamera22
+57,Wide on Timp,11130,11482,theCamera23
+70,Wide on Timp,13771,14013,theCamera23
+76,Wide on Timp,15478,16108,theCamera23
+96,Wide on Timp,20023,20284,theCamera23
+100,Wide on Timp,21119,21268,theCamera23
+32,Winds and Brass,5396,5545,theCamera24
+48,Winds and Brass,8933,9140,theCamera24
+52,Winds and Brass,10216,10556,theCamera24
+85,Winds and Brass,18039,18326,theCamera24
+94,Winds and Brass,19621,19833,theCamera24
+113,Winds and Brass,23820,24174,theCamera24
+14,Winds High,1738,1887,theCamera25
+22,Winds High,3058,3227,theCamera25
+27,Winds High,4115,4715,theCamera25
+31,Winds High,5281,5395,theCamera25
+41,Winds High,6878,7114,theCamera25
+43,Winds High,7453,7938,theCamera25
+49,Winds High,9141,9681,theCamera25
+60,Winds High,11816,12093,theCamera25
+81,Winds High,17077,17455,theCamera25
+92,Winds High,19321,19471,theCamera25
+98,Winds High,20593,20867,theCamera25
+106,Winds High,22099,22248,theCamera25
+111,Winds High,23224,23542,theCamera25
+119,Winds High,24633,24996,theCamera25
+124,Winds High,25632,25877,theCamera25
+131,Winds High,26878,27048,theCamera25
