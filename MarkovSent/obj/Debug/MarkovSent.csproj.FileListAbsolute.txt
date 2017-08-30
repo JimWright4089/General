@@ -1,0 +1,8 @@
+F:\lap\Sample\MarkovSent\bin\Debug\MarkovSent.exe
+F:\lap\Sample\MarkovSent\bin\Debug\MarkovSent.pdb
+F:\lap\Sample\MarkovSent\obj\Debug\MarkovSent.csprojResolveAssemblyReference.cache
+F:\lap\Sample\MarkovSent\obj\Debug\MarkovSent.FormMarkovSent.resources
+F:\lap\Sample\MarkovSent\obj\Debug\MarkovSent.FormProbabilityTable.resources
+F:\lap\Sample\MarkovSent\obj\Debug\MarkovSent.csproj.GenerateResource.Cache
+F:\lap\Sample\MarkovSent\obj\Debug\MarkovSent.exe
+F:\lap\Sample\MarkovSent\obj\Debug\MarkovSent.pdb
