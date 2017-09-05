@@ -15,7 +15,7 @@
 //  $
 //
 //----------------------------------------------------------------------------
-// compile: g++ JimsFridge.cpp -o i2ctest -lwiringPi -lstdc++
+// compile: g++ JimsFridge.cpp -o JimsFridge -lwiringPi -lstdc++
 
 #include <memory.h>
 #include <unistd.h>
@@ -37,6 +37,7 @@
 #include <chrono>
 
 using namespace std;
+using namespace chrono;
 
 //----------------------------------------------------------------------------
 //  Type defs
@@ -61,6 +62,7 @@ void InitSayings(const char* fileName, vector<string>& list);
 void Tweet(string text);
 void TweetDoorClosed(string door, uint32 time, double temp);
 double CelsiusToFahrenheit(double temp);
+string GetTemp(double temp);
 
 //----------------------------------------------------------------------------
 //  Old C defines for the file name stuff
@@ -74,15 +76,15 @@ double CelsiusToFahrenheit(double temp);
 //----------------------------------------------------------------------------
 const uint8  FRIDGE_DOOR  = 18;
 const uint8  FREEZER_DOOR = 17;
-const uint8  DOOR_CLOSED  =  1;
-const uint8  DOOR_OPEN    =  0;
+const uint8  DOOR_CLOSED  =  0;
+const uint8  DOOR_OPEN    =  1;
 const uint16 BUTTON_DEBOUNCE = 20;
 const uint8  I2C_WAIT_TIME = 100;
 const uint32 MAX_BORED_TIME = 28800;
 const uint32 MIN_BORED_TIME =  7200;
 const uint16 MAX_DOOR_OPEN_CHANCE = 100; // Don't tweet all the time if there are under 100 entries in the door open list
-const int mFridgeAddress = 0x48;  // i2C addresses
-const int mFreezerAddress = 0x49;
+const int mFridgeAddress = 0x49;  // i2C addresses
+const int mFreezerAddress = 0x48;
 
 //----------------------------------------------------------------------------
 //  File constants
@@ -123,13 +125,11 @@ int main(void)
   InitSayings(FRIDGE_DOOR_OPEN_SAYINGS_FILE, mFreezerDoorOpenSayings);
   InitSayings(FREEZER_DOOR_OPEN_SAYINGS_FILE, mFridgeDoorOpenSayings);
 
-  InitI2C();
   wiringPiSetup();
   wiringPiSetupGpio();
+  InitI2C();
   pinMode (FRIDGE_DOOR, INPUT) ;
   pinMode (FREEZER_DOOR, INPUT) ;
-
-  Tweet("Jim's Fridge SW V2.00 Online");
 
   // Setup all of the random numbers
   unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
@@ -141,8 +141,15 @@ int main(void)
   std::uniform_int_distribution<int> freezerSayingsDist(0,mFreezerDoorOpenSayings.size()-1);
   std::uniform_int_distribution<int> doorOpenTweetChance(0,MAX_DOOR_OPEN_CHANCE);
 
+  usleep(500000);
+  mFridgeTemp = ReadTempSensor(mFileFridge);
+  mFreezerTemp = ReadTempSensor(mFileFreezer);
+
+  Tweet("Jim's Fridge SW V2.00 Online Freezer:"+GetTemp(mFreezerTemp)+" Fridge:"+GetTemp(mFridgeTemp));
+
+
   /*
-  for (int n=0; n<mFridgeDoorOpenSayings.size(); ++n) 
+  for (int n=0; n<mFridgeDoorOpenSayings.size(); ++n)
   {
         cout << mFridgeDoorOpenSayings.at( n ) << endl;
   }
@@ -156,23 +163,25 @@ int main(void)
   {
     mFridgeTemp = ReadTempSensor(mFileFridge);
     mFreezerTemp = ReadTempSensor(mFileFreezer);
+
     bool fridgeChange = Debounce(FRIDGE_DOOR, &mFridgeDoorState, &mLastFridgeDoorState, &mLastFridgeDoorTime);
     bool freezerChange = Debounce(FREEZER_DOOR, &mFreezerDoorState, &mLastFreezerDoorState, &mLastFreezerDoorTime);
 
     // Check the Fridge door
-    // These two chunks are very much the same, but the paramters into a common 
+    // These two chunks are very much the same, but the paramters into a common
     // function would be too many for the cost
     if(true == fridgeChange)
     {
-	printf("Fridge:%d\n",mFridgeDoorState);
+        //printf("Fridge:%d\n",mFridgeDoorState);
 
-	if(DOOR_CLOSED == mFridgeDoorState)
+        if(DOOR_CLOSED == mFridgeDoorState)
         {
           TweetDoorClosed("Fridge", mOpenFridgeTime, mFridgeTemp);
         }
         else
         {
           mOpenFridgeTime = GetTime();
+		  printf("Open Fridge time:%d",mOpenFridgeTime);
 
           string saying = mFridgeDoorOpenSayings.at(fridgeSayingsDist(generator));
 	  if(mFridgeDoorOpenSayings.size() > doorOpenTweetChance(generator))
@@ -185,7 +194,7 @@ int main(void)
     // Check the Freezer door
     if(true == freezerChange)
     {
-	printf("Freezer:%d\n",mFreezerDoorState);
+	//printf("Freezer:%d\n",mFreezerDoorState);
 
 	if(DOOR_CLOSED == mFreezerDoorState)
         {
@@ -194,10 +203,11 @@ int main(void)
         else
         {
           mOpenFreezerTime = GetTime();
+		  printf("Open Freezer time:%d",mOpenFreezerTime);
 
           string saying = mFreezerDoorOpenSayings.at(freezerSayingsDist(generator));
-	  if(mFreezerDoorOpenSayings.size() > doorOpenTweetChance(generator))
-	  {
+          if(mFreezerDoorOpenSayings.size() > doorOpenTweetChance(generator))
+          {
             Tweet(saying);
           }
         }
@@ -239,37 +249,37 @@ bool Debounce(uint8 pin, uint8* curState, uint8* lastState, uint32* lastTime)
   uint8 reading = digitalRead(pin);
   bool stateChanged = false;
 
-  // check to see if you just pressed the button 
-  // (i.e. the input went from LOW to HIGH),  and you've waited 
-  // long enough since the last press to ignore any noise:  
+  // check to see if you just pressed the button
+  // (i.e. the input went from LOW to HIGH),  and you've waited
+  // long enough since the last press to ignore any noise:
 
   // If the switch changed, due to noise or pressing:
-  if (reading != *lastState) 
+  if (reading != *lastState)
   {
     // reset the debouncing timer
     *lastTime = GetTime();
-  } 
-  
-  if ((GetTime() - *lastTime) > BUTTON_DEBOUNCE) 
+  }
+
+  if ((GetTime() - *lastTime) > BUTTON_DEBOUNCE)
   {
     // whatever the reading is at, it's been there for longer
     // than the debounce delay, so take it as the actual current state:
 
     // if the button state has changed:
-    if (reading != *curState) 
+    if (reading != *curState)
     {
       *curState = reading;
       stateChanged = true;
     }
   }
 
-  *lastState = reading; 
+  *lastState = reading;
   return(stateChanged);
 }
 
 //----------------------------------------------------------------------------
 //  Purpose:
-//      Returns the time in milliseconds      
+//      Returns the time in milliseconds
 //
 //  Notes:
 //      None
@@ -277,14 +287,14 @@ bool Debounce(uint8 pin, uint8* curState, uint8* lastState, uint32* lastTime)
 //----------------------------------------------------------------------------
 uint32 GetTime()
 {
-  struct timeval theTime;
-  gettimeofday(&theTime,NULL);
-  return ((theTime.tv_sec * 1000) + (theTime.tv_usec/1000));
+  milliseconds ms = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
+
+  return ms.count();
 }
 
 //----------------------------------------------------------------------------
 //  Purpose:
-//      Returns the time in milliseconds      
+//      Returns the time in milliseconds
 //
 //  Notes:
 //      None
@@ -297,7 +307,7 @@ uint32 GetTimeInSeconds()
 
 //----------------------------------------------------------------------------
 //  Purpose:
-//      
+//
 //
 //  Notes:
 //      None
@@ -308,9 +318,11 @@ double ReadTempSensor(int filePointer)
   uint8 data[2];
   uint8 length;
 
+//  usleep(25000);
+
   // a 0x00 means ge tthe temperature
   data[0] = 0x00;
- 
+
   //----- WRITE BYTES -----
   length = 1;
   if (write(filePointer, data, length) != length)
@@ -329,9 +341,9 @@ double ReadTempSensor(int filePointer)
   else
   {
     // The temperature is in a 12 bit int.
-    int intTemp = data[0]<<4;
-    intTemp += data[1]>>4;
-
+    short intTemp = data[0]<<8;
+    intTemp += data[1];
+    intTemp /=32;
     // move the decimal
     return ((double)intTemp)*0.0625;
   }
@@ -340,7 +352,7 @@ double ReadTempSensor(int filePointer)
 
 //----------------------------------------------------------------------------
 //  Purpose:
-//      
+//
 //
 //  Notes:
 //      None
@@ -388,7 +400,7 @@ void InitSayings(const char* fileName, vector<string>& list)
 {
   ifstream sayingsFile(fileName);
 
-  if(!sayingsFile) 
+  if(!sayingsFile)
   {
     cout << "Cannot open input file.\n";
     return;
@@ -397,7 +409,7 @@ void InitSayings(const char* fileName, vector<string>& list)
   // The saysing file all end with "fin'" and then the character count lines,
   // we want to load everything up to fin.
   string saying;
-  while(getline( sayingsFile, saying )) 
+  while(getline( sayingsFile, saying ))
   {
     if("fin'" == saying.substr(0,4))
     {
@@ -420,14 +432,14 @@ void InitSayings(const char* fileName, vector<string>& list)
 void Tweet(string text)
 {
   string comandToSend = "python /home/pi/samba/jimsfridge/tweetaline.py \"" + text + "\"";
-  
+
   cout << comandToSend << endl;
   system(comandToSend.c_str());
 }
 
 //----------------------------------------------------------------------------
 //  Purpose:
-//     Tweet out the door closing    
+//     Tweet out the door closing
 //
 //  Notes:
 //      None
@@ -436,15 +448,14 @@ void Tweet(string text)
 void TweetDoorClosed(string door, uint32 time, double temp)
 {
   double length = GetTime() - time;
+
   length /= 1000;
-  char tempData[100];
   char timeData[10];
-  sprintf(tempData,"%5.2fF (%5.2fC)",CelsiusToFahrenheit(mFreezerTemp),mFreezerTemp);
   sprintf(timeData,"%5.2f",length);
   string saying = "The " +door +" Door is closed, is was open for "+
 	string(timeData)+
 	" seconds, and is at "+
-	string(tempData)+
+	GetTemp(temp)+
 	" degrees";
   Tweet(saying);
 }
@@ -461,3 +472,19 @@ double CelsiusToFahrenheit(double temp)
 {
   return temp * 9.0/5.0 + 32.0;
 }
+
+//----------------------------------------------------------------------------
+//  Purpose:
+//     Convert temps
+//
+//  Notes:
+//      None
+//
+//----------------------------------------------------------------------------
+string GetTemp(double temp)
+{
+  char tempData[100];
+  sprintf(tempData,"%5.2fF (%5.2fC)",CelsiusToFahrenheit(temp),temp);
+  return string(tempData);
+}
+
