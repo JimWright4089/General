@@ -20,8 +20,15 @@
 //
 //----------------------------------------------------------------------------
 #include <stdio.h>
+#include <memory.h>
+#include <string.h>
 #include <mosquitto.h>
 #include "StopWatch.hpp"
+
+//----------------------------------------------------------------------------
+//  Local Const
+//----------------------------------------------------------------------------
+const int MAX_STRING_LEN = 8;
 
 //----------------------------------------------------------------------------
 //  Global Variables
@@ -119,7 +126,20 @@ void publishCallback(struct mosquitto *mosq, void *obj, int mid)
 void messageCallback(struct mosquitto *mosq, void *obj,
     const struct mosquitto_message *message)
 {
-    printf("got message '%s' for topic '%s'\n",
-        (char*)message->payload, (char*)message->topic);
+    // If the topic is long then it's a string.
+    // I n production this needs to be better
+    if (strlen(message->topic) > MAX_STRING_LEN)
+    {
+        printf("got message '%s' for topic '%s'\n",
+            (char*)message->payload, (char*)message->topic);
+    }
+    else
+    {
+        double number = 0.0;
+        memcpy(&number, message->payload, sizeof(double));
+        printf("got message %9.3f for topic '%s'\n",
+            number, (char*)message->topic);
+
+    }
 }
 

@@ -22,6 +22,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <mosquitto.h>
+#include <memory.h>
 #include "StopWatch.hpp"
 
 //----------------------------------------------------------------------------
@@ -53,7 +54,7 @@ int main(void)
 {
     double theCount = 0.0;
     struct mosquitto *mosq;
-    char buf[MESSAGE_SIZE];
+    char buffer[MESSAGE_SIZE];
 
     // Setup two stopwatches, one to count, the other to send sin/cos to mqtt server
     StopWatch* displayStopWatch = new StopWatch(500);
@@ -87,11 +88,16 @@ int main(void)
         // Send the sin/cos to mqtt
         if (true == displayStopWatch->IsExpired())
         {
-            sprintf(buf, "%f", theSin);
-            int rcsin = mosquitto_publish(mosq, NULL, "test/sin", MESSAGE_SIZE, buf, 0, false);
-            sprintf(buf, "%f", theCos);
-            int rccos = mosquitto_publish(mosq, NULL, "test/cos", MESSAGE_SIZE, buf, 0, false);
-            printf("%d %d Count:%9.3f Sin:%9.3f  Cos:%9.3f\n", 
+            sprintf(buffer, "%f", theSin);
+            int rcsin = mosquitto_publish(mosq, NULL, "test/sinString", MESSAGE_SIZE, buffer, 0, false);
+            sprintf(buffer, "%f", theCos);
+            int rccos = mosquitto_publish(mosq, NULL, "test/cosString", MESSAGE_SIZE, buffer, 0, false);
+            
+            memcpy(buffer, &theSin, sizeof(double));
+            rcsin = mosquitto_publish(mosq, NULL, "test/sin", sizeof(double), buffer, 0, false);
+            memcpy(buffer, &theCos, sizeof(double));
+            rccos = mosquitto_publish(mosq, NULL, "test/cos", sizeof(double), buffer, 0, false);
+            printf("%d %d Count:%9.3f Sin:%9.3f  Cos:%9.3f\n",
                 rcsin,rccos,
                 theCount, theSin, theCos);
             displayStopWatch->Reset();
