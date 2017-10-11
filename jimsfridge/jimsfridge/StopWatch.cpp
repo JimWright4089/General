@@ -97,7 +97,7 @@ void StopWatch::Reset(void)
   }
 }
 
-uint32_t StopWatch::GetTimeLeft()
+int32_t StopWatch::GetTimeLeft()
 {
   if (false == mIsSeconds)
   {

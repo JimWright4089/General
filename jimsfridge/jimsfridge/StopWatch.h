@@ -32,7 +32,7 @@ class StopWatch
     void SetTime(uint32_t waitTime);
     bool IsExpired(void);
     void Reset(void);
-    uint32_t GetTimeLeft(void);
+    int32_t GetTimeLeft(void);
     static uint32_t Now(void);
     static uint32_t NowInSeconds(void);
 };

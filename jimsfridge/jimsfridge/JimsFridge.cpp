@@ -66,8 +66,8 @@ double CelsiusToFahrenheit(double temp);
 string GetTemp(double temp);
 void MQTTPublish(char* topic, bool packet);
 void MQTTPublish(char* topic, uint32_t packet);
+void MQTTPublish(char* topic, int32_t packet);
 void MQTTPublish(char* topic, double packet);
-void MQTTPublish(char* topic, uint8_t* packet, uint8_t packetLen);
 void MQTTPublish(char* topic, uint8_t* packet, uint8_t packetLen);
 void MQTTPublish(char* topic, string packet);
 void ConnectCallback(struct mosquitto *mosq, void *obj, int rc);
@@ -100,8 +100,10 @@ const uint8_t  DOOR_CLOSED  =  0;
 const uint8_t  DOOR_OPEN    =  1;
 const uint16_t BUTTON_DEBOUNCE = 20;
 const uint8_t  I2C_WAIT_TIME = 100;
+//const int32_t MAX_BORED_TIME = 960; // seconds
+//const int32_t MIN_BORED_TIME = 480; // seconds
 const uint32_t MAX_BORED_TIME = 28800; // seconds
-const uint32_t MIN_BORED_TIME =  7200; // seconds
+const uint32_t MIN_BORED_TIME = 7200; // seconds
 const uint32_t MAX_DOOR_WAIT = 900; // 15 seconds
 const uint32_t MAX_TWEET_WAIT = 300; // 5 seconds
 const uint32_t MAX_MQTT_WAIT = 200; // 100 ms
@@ -131,6 +133,7 @@ StopWatch mDoorStopWatch(MAX_DOOR_WAIT, true);
 bool mMQTTTweet = false;
 struct mosquitto *mMqttServer;
 bool mRunning = true;
+string mLastTweet = "";
 
 // Sayings list
 vector<string> mBoredSayings;
@@ -150,7 +153,7 @@ int main(void)
   int messageID;
   char mqttID[MAX_ID_LEN];
   int returnCode=0;
-  string lastTweet = "";
+  
 
   // Load in and init all the stuff
   InitSayings(SAYINGS_FILE, mBoredSayings);
@@ -158,7 +161,7 @@ int main(void)
   InitSayings(FREEZER_DOOR_OPEN_SAYINGS_FILE, mFridgeDoorOpenSayings);
   StopWatch tweetStopWatch(MAX_TWEET_WAIT, true);
   StopWatch boredStopWatch(true);
-  StopWatch mqttStopWatch((uint32_t)MAX_MQTT_WAIT);
+  StopWatch mqttStopWatch(MAX_MQTT_WAIT);
 
   wiringPiSetup();
   wiringPiSetupGpio();
@@ -176,7 +179,7 @@ int main(void)
   std::uniform_int_distribution<int> freezerSayingsDist(0,mFreezerDoorOpenSayings.size()-1);
   std::uniform_int_distribution<int> doorOpenTweetChance(0,MAX_DOOR_OPEN_CHANCE);
 
-  usleep(30000000);
+  usleep(50000000);
   mFridgeTemp = ReadTempSensor(mFileFridge);
   mFreezerTemp = ReadTempSensor(mFileFreezer);
 
@@ -194,14 +197,11 @@ int main(void)
 
   SetupHandlers();
 
-  Tweet("Jim's Fridge SW V2.00 Online Freezer:"+
+  Tweet("Jim's Fridge SW V2.01 Online Freezer:"+
     GetTemp(mFreezerTemp)+" Fridge:"+GetTemp(mFridgeTemp));
 
-  mDoorStopWatch.Reset();
-  tweetStopWatch.Reset();
-  boredStopWatch.SetTime((StopWatch::NowInSeconds()) + boredDist(generator));
+  boredStopWatch.SetTime(boredDist(generator));
   boredStopWatch.Reset();
-  mqttStopWatch.Reset();
 
   // End on control C
   while(true == mRunning)
@@ -239,7 +239,7 @@ int main(void)
       MQTTPublish(MQTT_FRIDGE_DOOR, (uint32_t)mFridgeDoorState);
       MQTTPublish(MQTT_FREEZER_TEMP, mFreezerTemp);
       MQTTPublish(MQTT_FRIDGE_TEMP, mFridgeTemp);
-      MQTTPublish(MQTT_LAST_TWEET, lastTweet);
+      MQTTPublish(MQTT_LAST_TWEET, mLastTweet);
       MQTTPublish(MQTT_BORED_TIME, boredStopWatch.GetTimeLeft());
       MQTTPublish(MQTT_LOCKOUT_TIME, tweetStopWatch.GetTimeLeft());
       MQTTPublish(MQTT_DOOR_TIME, mDoorStopWatch.GetTimeLeft());
@@ -293,10 +293,10 @@ int main(void)
 
     if(true == boredStopWatch.IsExpired())
     {
-      boredStopWatch.SetTime((StopWatch::NowInSeconds()) + boredDist(generator));
+      boredStopWatch.SetTime(boredDist(generator));
       boredStopWatch.Reset();
-      lastTweet = mBoredSayings.at(sayingsDist(generator));
-      Tweet(lastTweet);
+      mLastTweet = mBoredSayings.at(sayingsDist(generator));
+      Tweet(mLastTweet);
       printf("Fridge:%f Freezer=%f Fridge:%d %d Freezer:%d %d\n",
         mFridgeTemp, mFreezerTemp,
         fridgeChange, mFridgeDoorState,
@@ -495,7 +495,7 @@ void InitSayings(const char* fileName, vector<string>& list)
 void Tweet(string text)
 {
   string comandToSend = "python /home/pi/samba/jimsfridge/tweetaline.py \"" + text + "\"";
-
+  mLastTweet = text;
   cout << comandToSend << endl;
   system(comandToSend.c_str());
 }
@@ -532,7 +532,7 @@ void TweetDoorClosed(string door, uint32_t time, double temp)
   length /= 1000;
   char timeData[10];
   sprintf(timeData,"%5.2f",length);
-  string saying = "The " +door +" Door is closed, is was open for "+
+  string saying = "The " +door +" Door is closed, it was open for "+
 	string(timeData)+
 	" seconds, and is at "+
 	GetTemp(temp)+
@@ -579,6 +579,24 @@ string GetTemp(double temp)
 void MQTTPublish(char* topic, uint32_t packet)
 {
   int length = sizeof(uint32_t);
+  uint8_t data[length];
+
+  memcpy(data, &packet, length);
+  MQTTPublish(topic, data, length);
+
+}
+
+//----------------------------------------------------------------------------
+//  Purpose:
+//     Convert the int32 then publish the message
+//
+//  Notes:
+//      None
+//
+//----------------------------------------------------------------------------
+void MQTTPublish(char* topic, int32_t packet)
+{
+  int length = sizeof(int32_t);
   uint8_t data[length];
 
   memcpy(data, &packet, length);
