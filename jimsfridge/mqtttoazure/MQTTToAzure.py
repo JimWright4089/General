@@ -248,7 +248,7 @@ def parse_iot_hub_name():
     return m.group(1)
 
 if __name__ == "__main__":
-    time.sleep(30)
+    #time.sleep(30)
     gMQTTClient.on_message = on_message
     gMQTTClient.on_publish = on_publish
 
