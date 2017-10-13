@@ -1,0 +1,7 @@
+<Config>
+  <ConnectionString>HostName=XXXXXX.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=XXXXXXXXXXXXX</ConnectionString>
+  <EndPoint>messages/events</EndPoint>
+  <IOTHubURL>XXXXXXXX.azure-devices.net</IOTHubURL>
+  <DeviceKey>xxxxxxxxxxxxxxxxxxxxxx</DeviceKey>
+  <DeviceString>XXXXXXXX</DeviceString>
+</Config>
