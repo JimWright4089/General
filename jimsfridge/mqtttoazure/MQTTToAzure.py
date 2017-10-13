@@ -30,6 +30,7 @@ import paho.mqtt.client as paho
 import struct
 from StopWatch import StopWatch
 import urllib
+from pprint import pprint
 
 execfile("/home/pi/keys.py")
 
@@ -106,7 +107,7 @@ def receive_message_callback(message, counter):
     global gReceiveCallBackCount
     message_buffer = message.get_bytearray()
     size = len(message_buffer)
-    print ( "Received Message [%d]:" % counter )
+    print ( "\nReceived Message [%d]:" % counter )
     print ( "    Data: <<<%s>>> & Size=%d" % (message_buffer[:size].decode("utf-8"), size) )
     map_properties = message.properties()
     key_value_pair = map_properties.get_internals()
@@ -114,6 +115,10 @@ def receive_message_callback(message, counter):
     counter += 1
     gReceiveCallBackCount += 1
     print ( "    Total calls received: %d" % gReceiveCallBackCount )
+
+    if("TweetStatus" == message_buffer[:size].decode("utf-8")):
+      gMQTTClient.publish(MQTT_WEB_TWEET, 'True', 0)
+
     return IoTHubMessageDispositionResult.ACCEPTED
 
 #--------------------------------------------------------------------
@@ -124,12 +129,13 @@ def receive_message_callback(message, counter):
 #     None.
 #--------------------------------------------------------------------
 def send_confirmation_callback(message, result, user_context):
-    print ( "Confirmation[%d] received for message with result = %s" % (user_context, result) )
+    print ( "\nConfirmation[%d] received for message with result = %s" % (user_context, result) )
     map_properties = message.properties()
     print ( "    message_id: %s" % message.message_id )
     print ( "    correlation_id: %s" % message.correlation_id )
     key_value_pair = map_properties.get_internals()
     print ( "    Properties: %s" % key_value_pair )
+    pass
 
 def send_reported_state_callback(status_code, user_context):
     pass
@@ -177,11 +183,10 @@ def iothub_client_init():
     # to enable MQTT logging set to 1
     if client.protocol == IoTHubTransportProvider.MQTT:
         client.set_option("logtrace", 0)
-    client.set_message_callback(
-        receive_message_callback, RECEIVE_CONTEXT)
-    if client.protocol == IoTHubTransportProvider.MQTT or client.protocol == IoTHubTransportProvider.MQTT_WS:
-        client.set_device_method_callback(
-            device_method_callback, METHOD_CONTEXT)
+    client.set_message_callback(receive_message_callback, RECEIVE_CONTEXT)
+    # if client.protocol == IoTHubTransportProvider.MQTT or client.protocol == IoTHubTransportProvider.MQTT_WS:
+    #     client.set_device_method_callback(
+    #         device_method_callback, METHOD_CONTEXT)
     return client
 
 #--------------------------------------------------------------------
@@ -286,7 +291,8 @@ def iothub_client_sample_run():
         if client.protocol == IoTHubTransportProvider.MQTT:
             print ( "IoTHubClient is reporting state" )
             reported_state = "{\"newState\":\"standBy\"}"
-            client.send_reported_state(reported_state, len(reported_state), send_reported_state_callback, SEND_REPORTED_STATE_CONTEXT)
+            client.send_reported_state(reported_state, len(reported_state), 
+              send_reported_state_callback, SEND_REPORTED_STATE_CONTEXT)
 
         count = 1
         while True:
@@ -345,11 +351,10 @@ def parse_iot_hub_name():
 #     None.
 #--------------------------------------------------------------------
 if __name__ == "__main__":
-    #time.sleep(30)
+    time.sleep(30)
     gMQTTClient.on_message = on_message
     gMQTTClient.on_publish = on_publish
 
-    #client.tls_set('root.ca', certfile='c1.crt', keyfile='c1.key')
     gMQTTClient.connect("127.0.0.1", 1883, 60)
 
     gMQTTClient.subscribe(MQTT_FREEZER_ALL, 0)

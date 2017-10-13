@@ -1,0 +1,11 @@
+<- 18:01:01 PUBACK | PACKET_ID: 10
+-> 18:01:01 PUBLISH | IS_DUP: false | RETAIN: 0 | QOS: DELIVER_AT_LEAST_ONCE | TOPIC_NAME: devices/JimsFridgeDeviceID/messages/events/FreezerDoor=0&FreezerTemp=-2.9375&FridgeDoor=0&FridgeTemp=2.1875&BoredTime=17893&LockoutTime=-1507856161&DoorTime=-1507855561&LastTweet=Jim%27s%20Fridge%20SW%20V2.01%20Online%20Freezer%3A26.94F%20%28-2.81C%29%20Fridge%3A35.94F%20%28%202.19C%29&WebTweet=&%24.cid=correlation_7&%24.mid=message_7 | PACKET_ID: 11 | PAYLOAD_LEN: 16
+<- 18:01:01 PUBLISH | IS_DUP: false | RETAIN: 0 | QOS: DELIVER_AT_LEAST_ONCE = 0x01 | TOPIC_NAME: devices/JimsFridgeDeviceID/messages/devicebound/%24.to=%2Fdevices%2FJimsFridgeDeviceID%2Fmessages%2FdeviceBound&test=tteesstt | PACKET_ID: 35 | PAYLOAD_LEN: 9
+
+Received Message [0]:
+    Data: <<<test test>>> & Size=9
+    Properties: {'test': 'tteesstt'}
+    Total calls received: 1
+<- 18:01:02 PUBACK | PACKET_ID: 11
+-> 18:01:03 PUBLISH | IS_DUP: false | RETAIN: 0 | QOS: DELIVER_AT_LEAST_ONCE | TOPIC_NAME: devices/JimsFridgeDeviceID/messages/events/FreezerDoor=0&FreezerTemp=-2.9375&FridgeDoor=0&FridgeTemp=2.1875&BoredTime=17891&LockoutTime=-1507856163&DoorTime=-1507855563&LastTweet=Jim%27s%20Fridge%20SW%20V2.01%20Online%20Freezer%3A26.94F%20%28-2.81C%29%20Fridge%3A35.94F%20%28%202.19C%29&WebTweet=&%24.cid=correlation_8&%24.mid=message_8 | PACKET_ID: 12 | PAYLOAD_LEN: 16
+<- 18:01:04 PUBACK | PACKET_ID: 12
