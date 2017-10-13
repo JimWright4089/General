@@ -29,6 +29,7 @@
     private void InitializeComponent()
     {
       this.components = new System.ComponentModel.Container();
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(JimsFridgeIotHubTest));
       this.tDisplay = new System.Windows.Forms.Timer(this.components);
       this.gbFridge = new System.Windows.Forms.GroupBox();
       this.lFridgeTemp = new System.Windows.Forms.Label();
@@ -41,12 +42,12 @@
       this.label5 = new System.Windows.Forms.Label();
       this.label6 = new System.Windows.Forms.Label();
       this.groupBox1 = new System.Windows.Forms.GroupBox();
+      this.lDoorTime = new System.Windows.Forms.Label();
+      this.label10 = new System.Windows.Forms.Label();
       this.lLockoutTime = new System.Windows.Forms.Label();
       this.lBoredTime = new System.Windows.Forms.Label();
       this.label7 = new System.Windows.Forms.Label();
       this.label8 = new System.Windows.Forms.Label();
-      this.lDoorTime = new System.Windows.Forms.Label();
-      this.label10 = new System.Windows.Forms.Label();
       this.lLastTweet = new System.Windows.Forms.Label();
       this.bTweet = new System.Windows.Forms.Button();
       this.gbFridge.SuspendLayout();
@@ -167,6 +168,23 @@
       this.groupBox1.TabStop = false;
       this.groupBox1.Text = "Time";
       // 
+      // lDoorTime
+      // 
+      this.lDoorTime.Location = new System.Drawing.Point(95, 70);
+      this.lDoorTime.Name = "lDoorTime";
+      this.lDoorTime.Size = new System.Drawing.Size(194, 24);
+      this.lDoorTime.TabIndex = 5;
+      this.lDoorTime.Text = "label9";
+      // 
+      // label10
+      // 
+      this.label10.AutoSize = true;
+      this.label10.Location = new System.Drawing.Point(20, 70);
+      this.label10.Name = "label10";
+      this.label10.Size = new System.Drawing.Size(55, 24);
+      this.label10.TabIndex = 6;
+      this.label10.Text = "Door:";
+      // 
       // lLockoutTime
       // 
       this.lLockoutTime.Location = new System.Drawing.Point(95, 46);
@@ -201,23 +219,6 @@
       this.label8.TabIndex = 4;
       this.label8.Text = "Lockout:";
       // 
-      // lDoorTime
-      // 
-      this.lDoorTime.Location = new System.Drawing.Point(95, 70);
-      this.lDoorTime.Name = "lDoorTime";
-      this.lDoorTime.Size = new System.Drawing.Size(194, 24);
-      this.lDoorTime.TabIndex = 5;
-      this.lDoorTime.Text = "label9";
-      // 
-      // label10
-      // 
-      this.label10.AutoSize = true;
-      this.label10.Location = new System.Drawing.Point(20, 70);
-      this.label10.Name = "label10";
-      this.label10.Size = new System.Drawing.Size(55, 24);
-      this.label10.TabIndex = 6;
-      this.label10.Text = "Door:";
-      // 
       // lLastTweet
       // 
       this.lLastTweet.Location = new System.Drawing.Point(12, 294);
@@ -247,6 +248,7 @@
       this.Controls.Add(this.gbFreezer);
       this.Controls.Add(this.gbFridge);
       this.Font = new System.Drawing.Font("Railway", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
       this.Margin = new System.Windows.Forms.Padding(6);
       this.Name = "JimsFridgeIotHubTest";
       this.Text = "Jims Fridge IoT Hub Test";

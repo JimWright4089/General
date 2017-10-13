@@ -41,3 +41,5 @@ C:\JimsCode\General\IconBuilder\IconBuilder\obj\Debug\IconBuilder.pdb
 C:\JimsCode\General\IconBuilder\IconBuilder\bin\Debug\IconBuilder.exe.config
 C:\JimsCode\General\IconBuilder\IconBuilder\bin\Debug\IconBuilder.exe
 C:\JimsCode\General\IconBuilder\IconBuilder\bin\Debug\IconBuilder.pdb
+C:\JimsCode\General\IconBuilder\IconBuilder\obj\Debug\IconBuilder.csprojResolveAssemblyReference.cache
+C:\JimsCode\General\IconBuilder\IconBuilder\obj\Debug\IconBuilder.csproj.CoreCompileInputs.cache
