@@ -163,7 +163,7 @@
       this.groupBox1.Controls.Add(this.label8);
       this.groupBox1.Location = new System.Drawing.Point(12, 186);
       this.groupBox1.Name = "groupBox1";
-      this.groupBox1.Size = new System.Drawing.Size(295, 105);
+      this.groupBox1.Size = new System.Drawing.Size(447, 105);
       this.groupBox1.TabIndex = 2;
       this.groupBox1.TabStop = false;
       this.groupBox1.Text = "Time";
@@ -172,7 +172,7 @@
       // 
       this.lDoorTime.Location = new System.Drawing.Point(95, 70);
       this.lDoorTime.Name = "lDoorTime";
-      this.lDoorTime.Size = new System.Drawing.Size(194, 24);
+      this.lDoorTime.Size = new System.Drawing.Size(337, 24);
       this.lDoorTime.TabIndex = 5;
       this.lDoorTime.Text = "label9";
       // 
@@ -189,7 +189,7 @@
       // 
       this.lLockoutTime.Location = new System.Drawing.Point(95, 46);
       this.lLockoutTime.Name = "lLockoutTime";
-      this.lLockoutTime.Size = new System.Drawing.Size(194, 24);
+      this.lLockoutTime.Size = new System.Drawing.Size(337, 24);
       this.lLockoutTime.TabIndex = 1;
       this.lLockoutTime.Text = "label1";
       // 
@@ -197,7 +197,7 @@
       // 
       this.lBoredTime.Location = new System.Drawing.Point(95, 22);
       this.lBoredTime.Name = "lBoredTime";
-      this.lBoredTime.Size = new System.Drawing.Size(194, 24);
+      this.lBoredTime.Size = new System.Drawing.Size(337, 24);
       this.lBoredTime.TabIndex = 2;
       this.lBoredTime.Text = "label2";
       // 

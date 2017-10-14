@@ -72,8 +72,12 @@ namespace JimsFridgeIoTHubTest
       mServiceClient = ServiceClient.CreateFromConnectionString(
         mConfig.mConnectionString);
 
+      Thread.Sleep(300);
+
       mEventHubClient1 = EventHubClient.CreateFromConnectionString(
         mConfig.mConnectionString, mConfig.mIOTHubD2CEndpoint1);
+
+      Thread.Sleep(300);
 
       // Start the receivers up
       var d2cPartitions = mEventHubClient1.GetRuntimeInformation().PartitionIds;
@@ -170,14 +174,38 @@ namespace JimsFridgeIoTHubTest
     //--------------------------------------------------------------------
     private void tDisplay_Tick(object sender, EventArgs e)
     {
-      lFridgeDoor.Text = mFridgeDoor;
-      lFridgeTemp.Text = mFridgeTemp;
-      lFreezerDoor.Text = mFreezerDoor;
-      lFreezerTemp.Text = mFreezerTemp;
+      Int32 tempInt;
+      double tempDouble;
 
-      lDoorTime.Text = mDoorTime;
-      lBoredTime.Text = mBoredTime;
-      lLockoutTime.Text = mLockoutTime;
+      if("0" == mFridgeDoor)
+      {
+        lFridgeDoor.Text = "Closed";
+      }
+      else
+      {
+        lFridgeDoor.Text = "Open";
+      }
+
+      if ("0" == mFreezerDoor)
+      {
+        lFreezerDoor.Text = "Closed";
+      }
+      else
+      {
+        lFreezerDoor.Text = "Open";
+      }
+
+      double.TryParse(mFridgeTemp, out tempDouble);
+      lFridgeTemp.Text = GetTemp(tempDouble);
+      double.TryParse(mFreezerTemp, out tempDouble);
+      lFreezerTemp.Text = GetTemp(tempDouble);
+
+      Int32.TryParse(mDoorTime, out tempInt);
+      lDoorTime.Text = GetTime(tempInt);
+      Int32.TryParse(mBoredTime, out tempInt);
+      lBoredTime.Text = GetTime(tempInt);
+      Int32.TryParse(mLockoutTime, out tempInt);
+      lLockoutTime.Text = GetTime(tempInt);
 
       lLastTweet.Text = mLastTweet;
 
@@ -216,6 +244,84 @@ namespace JimsFridgeIoTHubTest
     private void bTweet_Click(object sender, EventArgs e)
     {
       mTweetNow = true;
+    }
+
+    //----------------------------------------------------------------------------
+    //  Purpose:
+    //     Convert temps
+    //
+    //  Notes:
+    //      None
+    //
+    //----------------------------------------------------------------------------
+    double CelsiusToFahrenheit(double temp)
+    {
+      return temp * 9.0/5.0 + 32.0;
+    }
+
+    //----------------------------------------------------------------------------
+    //  Purpose:
+    //     Convert temps
+    //
+    //  Notes:
+    //      None
+    //
+    //----------------------------------------------------------------------------
+    string GetTemp(double temp)
+    {
+      string tempString = CelsiusToFahrenheit(temp).ToString("F2") +
+            "F (" + temp.ToString("F2") + "C)";
+      return tempString;
+    }
+
+    //----------------------------------------------------------------------------
+    //  Purpose:
+    //     Convert temps
+    //
+    //  Notes:
+    //      None
+    //
+    //----------------------------------------------------------------------------
+    string GetTime(Int32 time)
+    {
+      TimeSpan theTime = new TimeSpan(0, 0, time);
+      string timeString = "";
+
+      int mTotalDays = (int)theTime.TotalDays;
+      int mTotalHours = (int)theTime.TotalHours;
+      int mTotalMinutes = (int)theTime.TotalMinutes;
+      int mTotalSeconds = (int)theTime.TotalSeconds;
+
+      if (mTotalDays > 0)
+      {
+        timeString = mTotalDays.ToString() + " Days " +
+          theTime.Hours.ToString("D2") + ":" +
+          theTime.Minutes.ToString("D2") + ":" +
+          theTime.Seconds.ToString("D2");
+      }
+      else
+      {
+        if(mTotalHours > 0)
+        {
+          timeString = mTotalHours.ToString("D") + ":" +
+            theTime.Minutes.ToString("D2") + ":" +
+            theTime.Seconds.ToString("D2");
+        }
+        else
+        {
+          if (mTotalMinutes > 0)
+          {
+            timeString = mTotalMinutes.ToString("D") + ":" +
+              theTime.Seconds.ToString("D2");
+          }
+          else
+          {
+            timeString = mTotalSeconds.ToString();
+          }
+        }
+      }
+
+      return timeString;
     }
   }
 }
