@@ -1,0 +1,11 @@
+C:\JimsCode\CS\OSFBusinessSolutionsTest\OSFBusinessSolutionsTest\bin\Debug\OSFBusinessSolutionsTest.exe.config
+C:\JimsCode\CS\OSFBusinessSolutionsTest\OSFBusinessSolutionsTest\bin\Debug\OSFBusinessSolutionsTest.exe
+C:\JimsCode\CS\OSFBusinessSolutionsTest\OSFBusinessSolutionsTest\bin\Debug\OSFBusinessSolutionsTest.pdb
+C:\JimsCode\CS\OSFBusinessSolutionsTest\OSFBusinessSolutionsTest\obj\Debug\OSFBusinessSolutionsTest.Help.resources
+C:\JimsCode\CS\OSFBusinessSolutionsTest\OSFBusinessSolutionsTest\obj\Debug\OSFBusinessSolutionsTest.OSFBusinessSolutionsTest.resources
+C:\JimsCode\CS\OSFBusinessSolutionsTest\OSFBusinessSolutionsTest\obj\Debug\OSFBusinessSolutionsTest.Properties.Resources.resources
+C:\JimsCode\CS\OSFBusinessSolutionsTest\OSFBusinessSolutionsTest\obj\Debug\OSFBusinessSolutionsTest.csproj.GenerateResource.Cache
+C:\JimsCode\CS\OSFBusinessSolutionsTest\OSFBusinessSolutionsTest\obj\Debug\OSFBusinessSolutionsTest.csproj.CoreCompileInputs.cache
+C:\JimsCode\CS\OSFBusinessSolutionsTest\OSFBusinessSolutionsTest\obj\Debug\OSFBusinessSolutionsTest.exe
+C:\JimsCode\CS\OSFBusinessSolutionsTest\OSFBusinessSolutionsTest\obj\Debug\OSFBusinessSolutionsTest.pdb
+C:\JimsCode\CS\OSFBusinessSolutionsTest\OSFBusinessSolutionsTest\obj\Debug\OSFBusinessSolutionsTest.csprojResolveAssemblyReference.cache
